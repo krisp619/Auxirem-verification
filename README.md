@@ -2,21 +2,24 @@
 
 Monorepo-style setup with:
 
-- Frontend (React + TypeScript + Vite) in the project root
-- Backend (Node + Express) in `backend/`
+- Frontend (React + TypeScript + Vite) in `client/`
+- Backend (Node + Express) in `server/`
 
 ## Project Structure
 
 ```text
 .
-|- src/                 # Frontend source
-|- backend/             # Backend API
+|- client/              # Frontend app
+|  |- src/
+|  |- public/
+|  |- vite.config.ts
+|- server/              # Backend API
 |  |- controllers/
 |  |- models/
 |  |- routes/
 |  |- services/
 |  |- server.js
-|- package.json         # Root scripts for frontend + backend
+|- package.json         # Root orchestration scripts
 ```
 
 ## Setup
@@ -27,10 +30,16 @@ Install root dependencies:
 npm install
 ```
 
+Install frontend dependencies:
+
+```bash
+npm --prefix client install
+```
+
 Install backend dependencies:
 
 ```bash
-npm --prefix backend install
+npm --prefix server install
 ```
 
 ## Run Commands
@@ -44,19 +53,19 @@ npm run dev
 Run only frontend:
 
 ```bash
-npm run dev:frontend
+npm run dev:client
 ```
 
 Run only backend in watch mode:
 
 ```bash
-npm run dev:backend
+npm run dev:server
 ```
 
 Run backend without watch mode:
 
 ```bash
-npm run start:backend
+npm run start:server
 ```
 
 Build frontend:
