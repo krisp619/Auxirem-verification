@@ -124,3 +124,5 @@ npm run preview
 - Do not commit `.env` files
 - Keep secrets in local environment only
 - Use `.env.example` for documenting required keys
+- `server/.env` must contain valid `PORT` (1-65535)
+- `client/.env` must contain valid `VITE_API_BASE_URL` starting with `http://` or `https://`

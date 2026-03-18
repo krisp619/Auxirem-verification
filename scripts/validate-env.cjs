@@ -35,6 +35,21 @@ function parseEnv(content) {
 
 let hasError = false;
 
+function isValidHttpUrl(value) {
+  try {
+    const parsed = new URL(value);
+    return parsed.protocol === "http:" || parsed.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
+function isValidPort(value) {
+  if (!/^\d+$/.test(value)) return false;
+  const num = Number(value);
+  return num >= 1 && num <= 65535;
+}
+
 for (const check of checks) {
   const relPath = path.relative(root, check.file);
 
@@ -55,6 +70,24 @@ for (const check of checks) {
     console.log("Missing keys in " + relPath + ": " + missingKeys.join(", "));
   } else {
     console.log("OK: " + relPath);
+
+    if (relPath === path.join("server", ".env")) {
+      const port = envMap.get("PORT");
+      if (!isValidPort(port)) {
+        hasError = true;
+        console.log("Invalid PORT in " + relPath + ": must be 1-65535");
+      }
+    }
+
+    if (relPath === path.join("client", ".env")) {
+      const apiBase = envMap.get("VITE_API_BASE_URL");
+      if (!isValidHttpUrl(apiBase)) {
+        hasError = true;
+        console.log(
+          "Invalid VITE_API_BASE_URL in " + relPath + ": must start with http:// or https://"
+        );
+      }
+    }
   }
 }
 
