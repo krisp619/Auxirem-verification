@@ -36,6 +36,12 @@ Create env files automatically:
 npm run setup:env
 ```
 
+Validate env files:
+
+```bash
+npm run validate:env
+```
+
 Do full setup in one command:
 
 ```bash
