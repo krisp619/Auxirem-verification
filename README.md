@@ -1,73 +1,84 @@
-# React + TypeScript + Vite
+# Auxirem Verification
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Monorepo-style setup with:
 
-Currently, two official plugins are available:
+- Frontend (React + TypeScript + Vite) in the project root
+- Backend (Node + Express) in `backend/`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Project Structure
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```text
+.
+|- src/                 # Frontend source
+|- backend/             # Backend API
+|  |- controllers/
+|  |- models/
+|  |- routes/
+|  |- services/
+|  |- server.js
+|- package.json         # Root scripts for frontend + backend
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Setup
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Install root dependencies:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+Install backend dependencies:
+
+```bash
+npm --prefix backend install
+```
+
+## Run Commands
+
+Run frontend + backend together:
+
+```bash
+npm run dev
+```
+
+Run only frontend:
+
+```bash
+npm run dev:frontend
+```
+
+Run only backend in watch mode:
+
+```bash
+npm run dev:backend
+```
+
+Run backend without watch mode:
+
+```bash
+npm run start:backend
+```
+
+Build frontend:
+
+```bash
+npm run build
+```
+
+Preview frontend build:
+
+```bash
+npm run preview
+```
+
+## Branch Workflow
+
+- Do all feature work on `dev`
+- Avoid direct push to `main`
+- Raise Pull Request: `dev` -> `main`
+
+## Environment Notes
+
+- Do not commit `.env` files
+- Keep secrets in local environment only
+- Use `.env.example` for documenting required keys
