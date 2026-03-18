@@ -4,6 +4,8 @@
   "version": "0.0.0",
   "scripts": {
     "install:all": "npm install && npm --prefix client install && npm --prefix server install",
+    "setup:env": "node scripts/setup-env.cjs",
+    "setup": "npm run install:all && npm run setup:env",
     "dev": "concurrently \"npm --prefix client run dev\" \"npm --prefix server run dev\"",
     "dev:client": "npm --prefix client run dev",
     "dev:server": "npm --prefix server run dev",

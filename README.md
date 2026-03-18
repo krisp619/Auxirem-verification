@@ -30,6 +30,18 @@ Install everything (root + client + server):
 npm run install:all
 ```
 
+Create env files automatically:
+
+```bash
+npm run setup:env
+```
+
+Do full setup in one command:
+
+```bash
+npm run setup
+```
+
 Or install each package separately:
 
 Install root dependencies:
