@@ -24,6 +24,14 @@ Monorepo-style setup with:
 
 ## Setup
 
+Install everything (root + client + server):
+
+```bash
+npm run install:all
+```
+
+Or install each package separately:
+
 Install root dependencies:
 
 ```bash
@@ -40,6 +48,13 @@ Install backend dependencies:
 
 ```bash
 npm --prefix server install
+```
+
+Create env files from examples:
+
+```bash
+copy server\\.env.example server\\.env
+copy client\\.env.example client\\.env
 ```
 
 ## Run Commands
